@@ -1,1 +1,4 @@
-# reminder-api
+# Reminder Api
+
+> - yarn
+> - yarn start
