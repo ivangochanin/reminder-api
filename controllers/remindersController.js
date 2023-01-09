@@ -3,11 +3,11 @@ const getAllRemindersController = (req, res) => {
 }
 
 const createReminderController = (req, res) => {
-    res.send('create reminder')
+    res.json(req.body)
 }
 
 const getSingleReminderController = (req, res) => {
-    res.send('get single reminder')
+    res.json({id:req.params.id})
 }
 
 const updateReminderController = (req, res) => {
