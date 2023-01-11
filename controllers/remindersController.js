@@ -1,9 +1,12 @@
+const Reminder = require('../models/Reminder')
+
 const getAllRemindersController = (req, res) => {
     res.send('get all reminders')
 }
 
-const createReminderController = (req, res) => {
-    res.json(req.body)
+const createReminderController = async (req, res) => {
+    const createReminder = await Reminder.create(req.body)
+    res.status(201).json({createReminder})
 }
 
 const getSingleReminderController = (req, res) => {
