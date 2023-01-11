@@ -5,8 +5,12 @@ const getAllRemindersController = (req, res) => {
 }
 
 const createReminderController = async (req, res) => {
-    const createReminder = await Reminder.create(req.body)
-    res.status(201).json({createReminder})
+    try {
+        const createReminder = await Reminder.create(req.body)
+        res.status(201).json({createReminder})
+    } catch (error) {
+        res.status(500).json({ msg: error})
+    }
 }
 
 const getSingleReminderController = (req, res) => {
