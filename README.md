@@ -1,5 +1,6 @@
 # Reminder Api
 
+> - add .env file with mongodb connecting string - see .envExample
 > - yarn
 > - yarn start
 
