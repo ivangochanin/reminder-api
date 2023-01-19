@@ -1,4 +1,4 @@
-const subCategory = require('../models/subCategory');
+const subCategory = require('../models/SubCategory');
 
 const getAllSubCategoriesByCategoryIdController = async (req, res) => {
 	try {
