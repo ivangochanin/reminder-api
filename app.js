@@ -10,7 +10,7 @@ app.use(express.json());
 // root route
 app.use('/api/v1/reminders', remindersRoutes);
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const startBackend = async () => {
 	try {
