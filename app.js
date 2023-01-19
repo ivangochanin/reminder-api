@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const remindersRoutes = require('./routes/remindersRoutes');
+const categoriesRoutes = require('./routes/categoriesRoutes');
+const subCategoriesRoutes = require('./routes/subCategoriesRoutes');
 const connectDB = require('./db/databaseConnect');
 require('dotenv').config() // we do not need to store in variable
 
@@ -8,7 +10,10 @@ require('dotenv').config() // we do not need to store in variable
 app.use(express.json());
 
 // root route
+app.use('/api/v1/categories', categoriesRoutes);
+app.use('/api/v1/subcategories', subCategoriesRoutes);
 app.use('/api/v1/reminders', remindersRoutes);
+
 
 const port = process.env.PORT || 3000;
 
