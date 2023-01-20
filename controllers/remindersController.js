@@ -1,5 +1,16 @@
 const Reminder = require('../models/Reminder');
 
+const getAllRemindersBySubCategoryIdController = async (req, res) => {
+	try {
+		const allReminders = await Reminder.find({})
+			.where({subCategoryId: req.params.id});
+			
+		res.status(200).json({ allReminders });
+	} catch (error) {
+		res.status(500).json({ msg: error });
+	}
+}
+
 const getAllRemindersController = async (req, res) => {
 	try {
 		const allReminders = await Reminder.find({});
@@ -79,6 +90,7 @@ const updateReminderController = async (req, res) => {
 };
 
 module.exports = {
+	getAllRemindersBySubCategoryIdController,
 	getAllRemindersController,
 	createReminderController,
 	getSingleReminderController,

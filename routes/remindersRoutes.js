@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {
+	getAllRemindersBySubCategoryIdController,
 	getAllRemindersController,
 	createReminderController,
 	getSingleReminderController,
@@ -19,5 +20,6 @@ router.route('/:id').get(getSingleReminderController).delete(deleteReminderContr
 // or chain all together
 router.route('/').get(getAllRemindersController).post(createReminderController);
 router.route('/:id').get(getSingleReminderController).patch(updateReminderController).delete(deleteReminderController);
+router.route('/reminders-by-subcategory/:id').get(getAllRemindersBySubCategoryIdController)
 
 module.exports = router;

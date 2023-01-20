@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
 
 const ReminderSchema = new mongoose.Schema({
-	category: {
+	subCategoryId: {
 		type: String,
-		required: [true, 'ERROR: Category is required'],
-		trim: true,
-		maxlength: [20, '20 characters max'],
+		required: [true, 'ERROR: SubCategory is required'],
 	},
 	title: {
 		type: String,

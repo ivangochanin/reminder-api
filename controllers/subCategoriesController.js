@@ -2,7 +2,10 @@ const subCategory = require('../models/SubCategory');
 
 const getAllSubCategoriesByCategoryIdController = async (req, res) => {
 	try {
-		const allSubCategories = await subCategory.find().sort({ order: 1});
+		const allSubCategories = await subCategory.find()
+			.where({categoryId: req.params.id})
+			.sort({ order: 1});
+		
 		res.status(200).json({ allSubCategories });
 	} catch (error) {
 		res.status(500).json({ msg: error });

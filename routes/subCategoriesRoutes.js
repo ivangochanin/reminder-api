@@ -11,7 +11,6 @@ const {
 } = require('../controllers/subCategoriesController');
 
 
-
 // categories routes
 router.route('/').get(getAllSubCategoriesController).post(createSubCategoryController);
 router.route('/:id').get(getSingleSubCategoryController).patch(updateSubCategoryController).delete(deleteSubCategoryController);
