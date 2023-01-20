@@ -11,6 +11,10 @@ const ReminderSchema = new mongoose.Schema({
 		trim: true,
 		maxlength: [50, '50 characters max'],
 	},
+	content: {
+		type: String,
+		required: [true, 'ERROR: Content is required']
+	},
 	createdAt: {
 		type: Date,
 		default: Date.now(),
