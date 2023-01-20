@@ -11,8 +11,11 @@ app.use(express.json());
 
 // root route
 app.use('/api/v1/categories', categoriesRoutes);
+app.use('/api/v1/admin/categories', categoriesRoutes);
 app.use('/api/v1/subcategories', subCategoriesRoutes);
+app.use('/api/v1/admin/subcategories', subCategoriesRoutes);
 app.use('/api/v1/reminders', remindersRoutes);
+app.use('/api/v1/admin/reminders', remindersRoutes);
 
 
 const port = process.env.PORT || 3000;
