@@ -2,7 +2,7 @@ const Category = require('../models/Category');
 
 const getAllCategoriesController = async (req, res) => {
 	try {
-		const allCategories = await Category.find().sort({ order: 1});
+		const allCategories = await Category.find().sort({ createdAt: -1}); // sort last created
 		res.status(200).json({ allCategories });
 	} catch (error) {
 		res.status(500).json({ msg: error });
