@@ -1,0 +1,2 @@
+- mongoose - join two collections
+- add WYISWYG editor
