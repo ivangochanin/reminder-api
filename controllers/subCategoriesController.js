@@ -3,7 +3,7 @@ const subCategory = require('../models/SubCategory');
 const getAllSubCategoriesByCategoryIdController = async (req, res) => {
 	try {
 		const allSubCategories = await subCategory.find()
-			.where({categoryId: req.params.id})
+			.where({category: req.params.id})
 			.sort({ order: 1});
 		
 		res.status(200).json({ allSubCategories });
