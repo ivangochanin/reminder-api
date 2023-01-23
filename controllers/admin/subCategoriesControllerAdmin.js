@@ -15,27 +15,10 @@ const getAllSubCategoriesByCategoryIdController = async (req, res) => {
 
 const getAllSubCategoriesController = async (req, res) => {
 	try {
-		const allSubCategories = await subCategory.aggregate(
-			[
-				{
-					'$lookup': {
-						from: category.collection.name, // collection to join
-						localField: 'categoryId', // from subcategory field
-						foreignField: '_id', // id from joined collection
-						as: 'category_lookup', // named key in subcategories
-					}
-				},
-				// For this data model, will always be 1 record in right-side
-				// of join, so take 1st joined array element
-				{
-					'$set': {
-						category_lookup: {'$first': '$category_lookup'},
-					}
-				},
-			]
-		)
+
+		const allSubCategories = await subCategory.find()
+			.populate('category')
 			.sort({ order: 1})
-			.exec();
 
 		res.status(200).json({ allSubCategories });
 	} catch (error) {
