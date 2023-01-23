@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
-const category = require('../models/Category');
 
 const SubCategorySchema = new mongoose.Schema({
-    categoryId: {
+    category: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: category.collection.name
+      ref: 'Category'
     },
     name: {
         type: String,
