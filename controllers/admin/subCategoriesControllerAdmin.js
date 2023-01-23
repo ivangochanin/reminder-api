@@ -1,11 +1,12 @@
 const subCategory = require('../../models/SubCategory');
+const category = require('../../models/Category')
 
 const getAllSubCategoriesByCategoryIdController = async (req, res) => {
 	try {
 		const allSubCategories = await subCategory.find()
 			.where({categoryId: req.params.id})
 			.sort({ order: 1});
-		
+
 		res.status(200).json({ allSubCategories });
 	} catch (error) {
 		res.status(500).json({ msg: error });
@@ -14,7 +15,28 @@ const getAllSubCategoriesByCategoryIdController = async (req, res) => {
 
 const getAllSubCategoriesController = async (req, res) => {
 	try {
-		const allSubCategories = await subCategory.find().sort({ order: 1});
+		const allSubCategories = await subCategory.aggregate(
+			[
+				{
+					'$lookup': {
+						from: category.collection.name, // collection to join
+						localField: 'categoryId', // from subcategory field
+						foreignField: '_id', // id from joined collection
+						as: 'category_lookup', // named key in subcategories
+					}
+				},
+				// For this data model, will always be 1 record in right-side
+				// of join, so take 1st joined array element
+				{
+					'$set': {
+						category_lookup: {'$first': '$category_lookup'},
+					}
+				},
+			]
+		)
+			.sort({ order: 1})
+			.exec();
+
 		res.status(200).json({ allSubCategories });
 	} catch (error) {
 		res.status(500).json({ msg: error });
