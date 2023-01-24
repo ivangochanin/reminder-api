@@ -6,12 +6,23 @@ const ReminderSchema = new mongoose.Schema({
 		ref: 'SubCategory',
 		required: [true, 'ERROR: SubCategory is required'],
 	},
-	title: {
+	name: {
 		type: String,
-		required: [true, 'ERROR: Title is required'],
+		required: [true, 'ERROR: Name is required'],
 		trim: true,
 		maxlength: [50, '50 characters max'],
 	},
+	slug: {
+        type: String,
+        required: [true, 'ERROR: Slug is required'],
+        trim: true,
+        unique: true,
+        maxlength: [50, '50 characters max']
+    },
+    order: {
+        type: Number,
+        default: 1
+    },
 	content: {
 		type: String,
 		required: [true, 'ERROR: Content is required']
