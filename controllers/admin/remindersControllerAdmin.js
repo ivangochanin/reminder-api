@@ -4,7 +4,7 @@ const getAllRemindersBySubCategoryIdController = async (req, res) => {
 	try {
 		const allReminders = await Reminder.find({})
 			.where({subCategoryId: req.params.id});
-			
+
 		res.status(200).json({ allReminders });
 	} catch (error) {
 		res.status(500).json({ msg: error });
@@ -13,7 +13,7 @@ const getAllRemindersBySubCategoryIdController = async (req, res) => {
 
 const getAllRemindersController = async (req, res) => {
 	try {
-		const allReminders = await Reminder.find({});
+		const allReminders = await Reminder.find().populate('subcategory');
 		res.status(200).json({ allReminders });
 	} catch (error) {
 		res.status(500).json({ msg: error });

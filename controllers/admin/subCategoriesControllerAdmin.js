@@ -3,6 +3,8 @@ const subCategory = require('../../models/SubCategory');
 const getAllSubCategoriesByCategoryIdController = async (req, res) => {
 	try {
 		const allSubCategories = await subCategory.find()
+			.populate('category')
+			.populate('reminders')
 			.where({category: req.params.id})
 			.sort({ order: 1});
 

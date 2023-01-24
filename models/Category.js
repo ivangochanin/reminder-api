@@ -11,6 +11,7 @@ const CategorySchema = new mongoose.Schema({
         type: String,
         required: [true, 'ERROR: Slug is required'],
         trim: true,
+        unique: true,
         maxlength: [50, '50 characters max']
     },
     order: {
@@ -23,4 +24,4 @@ const CategorySchema = new mongoose.Schema({
       },
 });
 
-module.exports = mongoose.model('Category', CategorySchema); 
+module.exports = mongoose.model('Category', CategorySchema);

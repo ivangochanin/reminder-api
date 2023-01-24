@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
 const ReminderSchema = new mongoose.Schema({
-	subCategoryId: {
-		type: String,
+	subcategory: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'SubCategory',
 		required: [true, 'ERROR: SubCategory is required'],
 	},
 	title: {

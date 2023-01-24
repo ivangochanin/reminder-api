@@ -5,6 +5,10 @@ const SubCategorySchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Category'
     },
+    reminders: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Reminder'
+    }],
     name: {
         type: String,
         required: [true, 'ERROR: Name is required'],
@@ -15,6 +19,7 @@ const SubCategorySchema = new mongoose.Schema({
         type: String,
         required: [true, 'ERROR: Slug is required'],
         trim: true,
+        unique: true,
         maxlength: [50, '50 characters max']
     },
     order: {
