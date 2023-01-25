@@ -1,4 +1,5 @@
 const Reminder = require('../../models/Reminder');
+const SubCategory = require('../../models/SubCategory');
 
 const getAllRemindersBySubCategoryIdController = async (req, res) => {
 	try {
@@ -23,7 +24,22 @@ const getAllRemindersController = async (req, res) => {
 const createReminderController = async (req, res) => {
 	try {
 		const createReminder = await Reminder.create(req.body);
-		res.status(201).json({ createReminder });
+		const {_id, subcategory} = createReminder
+
+		// update subcategory with created reminder
+		SubCategory.findByIdAndUpdate(subcategory,
+			{
+				$push: { reminders: [_id] }
+			},
+			(error, subCategory) => {
+				if (error){
+					res.status(500).json({ msg: error });
+				}
+				else{
+					res.status(201).json({ createReminder, subCategory });
+				}
+			}
+		)
 	} catch (error) {
 		res.status(500).json({ msg: error });
 	}
