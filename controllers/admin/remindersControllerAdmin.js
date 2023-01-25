@@ -48,7 +48,7 @@ const getSingleReminderController = async (req, res) => {
 		/* const getSingleReminder = await Reminder.findOne({ _id: req.params.id }); */
 		// or in two lines:
 		const { id: reminderID } = req.params;
-		const getSingleReminder = await Reminder.findOne({ _id: reminderID });
+		const getSingleReminder = await Reminder.findOne({ _id: reminderID }).populate('subcategory');
 
 		if (!getSingleReminder) {
 			return res
