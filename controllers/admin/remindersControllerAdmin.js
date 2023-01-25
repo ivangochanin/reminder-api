@@ -33,11 +33,9 @@ const createReminderController = async (req, res) => {
 			},
 			(error, subCategory) => {
 				if (error){
-					res.status(500).json({ msg: error });
+					return res.status(500).json({ msg: error });
 				}
-				else{
-					res.status(201).json({ createReminder, subCategory });
-				}
+				return res.status(201).json({ createReminder, subCategory });
 			}
 		)
 	} catch (error) {
