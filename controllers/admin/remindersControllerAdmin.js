@@ -114,6 +114,7 @@ const updateReminderController = async (req, res) => {
 		}
 
 		if(!oldReminder.subcategory.equals(req.body.subcategory)) {
+			 // Remove reminder from subCategory reminder array
 			 SubCategory.findByIdAndUpdate(oldReminder.subcategory,
 				{
 					$pullAll: { reminders: [oldReminder._id] }
@@ -124,7 +125,7 @@ const updateReminderController = async (req, res) => {
 					}
 				}	
 			)
-
+            // Add reminder to subCategory reminder array
 			SubCategory.findByIdAndUpdate(req.body.subcategory,
 				{
 					$push: { reminders: [req.body._id] }
