@@ -96,6 +96,8 @@ const deleteReminderController = async (req, res) => {
 const updateReminderController = async (req, res) => {
 	try {
 		const { id: reminderID } = req.params;
+		const oldReminder = await Reminder.findById(req.body._id)
+		
 		const getSingleReminder = await Reminder.findOneAndUpdate(
 			{ _id: reminderID },
 			req.body,
@@ -111,7 +113,31 @@ const updateReminderController = async (req, res) => {
 				.json({ msg: `There is no reminder with id: ${reminderID}` });
 		}
 
-		res.status(200).json({ getSingleReminder });
+		if(!oldReminder.subcategory.equals(req.body.subcategory)) {
+			 SubCategory.findByIdAndUpdate(oldReminder.subcategory,
+				{
+					$pullAll: { reminders: [oldReminder._id] }
+				},
+				(error, subCategory) => {
+					if (error){
+						return res.status(500).json({ msg: error });
+					}
+				}	
+			)
+
+			SubCategory.findByIdAndUpdate(req.body.subcategory,
+				{
+					$push: { reminders: [req.body._id] }
+				},
+				(error, subCategory) => {
+					if (error){
+						return res.status(500).json({ msg: error });
+					}
+				}
+			)
+		}
+
+		return res.status(200).json({ getSingleReminder });
 	} catch (error) {
 		res.status(500).json({ msg: error });
 	}
