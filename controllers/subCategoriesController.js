@@ -1,11 +1,15 @@
 const subCategory = require('../models/SubCategory');
+const categoryModel = require('../models/Category')
 
-const getAllSubCategoriesByCategoryIdController = async (req, res) => {
+const getAllSubCategoriesByCategorySlugController = async (req, res) => {
 	try {
+		const category = await categoryModel.where({slug: req.params.slug})
 		const allSubCategories = await subCategory.find()
-			.where({category: req.params.id})
+			.populate('category')
+			.populate('reminders')
+			.where({category: category[0]._id})
 			.sort({ order: 1});
-		
+
 		res.status(200).json({ allSubCategories });
 	} catch (error) {
 		res.status(500).json({ msg: error });
@@ -91,7 +95,7 @@ const updateSubCategoryController = async (req, res) => {
 };
 
 module.exports = {
-	getAllSubCategoriesByCategoryIdController,
+	getAllSubCategoriesByCategorySlugController,
 	getAllSubCategoriesController,
 	createSubCategoryController,
     getSingleSubCategoryController,

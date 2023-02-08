@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const {
-    getAllSubCategoriesByCategoryIdController,
+    getAllSubCategoriesByCategorySlugController,
 	getAllSubCategoriesController,
 	createSubCategoryController,
     getSingleSubCategoryController,
@@ -14,7 +14,7 @@ const {
 // categories routes
 router.route('/').get(getAllSubCategoriesController).post(createSubCategoryController);
 router.route('/:id').get(getSingleSubCategoryController).patch(updateSubCategoryController).delete(deleteSubCategoryController);
-router.route('/subcategories-by-category/:id').get(getAllSubCategoriesByCategoryIdController)
+router.route('/subcategories-by-category/:slug').get(getAllSubCategoriesByCategorySlugController)
 
 
 module.exports = router;
