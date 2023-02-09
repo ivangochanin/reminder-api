@@ -3,10 +3,7 @@ const router = express.Router();
 const {
 	getAllRemindersBySubCategoryIdController,
 	getAllRemindersController,
-	createReminderController,
 	getSingleReminderController,
-	updateReminderController,
-	deleteReminderController,
 } = require('../controllers/remindersController');
 
 
@@ -18,8 +15,8 @@ router.route('/:id').get(getSingleReminderController).patch(updateReminderContro
 router.route('/:id').get(getSingleReminderController).delete(deleteReminderController); */
 
 // or chain all together
-router.route('/').get(getAllRemindersController).post(createReminderController);
-router.route('/:id').get(getSingleReminderController).patch(updateReminderController).delete(deleteReminderController);
+router.route('/').get(getAllRemindersController);
+router.route('/:slug').get(getSingleReminderController);
 router.route('/reminders-by-subcategory/:id').get(getAllRemindersBySubCategoryIdController)
 
 module.exports = router;
