@@ -30,7 +30,7 @@ const ReminderSchema = new mongoose.Schema({
 	language: {
 		type: String,
 		trim: true,
-		enum: ['html', 'css', 'javascript', 'jsx', 'json', 'graphql'],
+		enum: ['html', 'css', 'javascript', 'typescript', 'json', 'graphql'],
 	},
 	createdAt: {
 		type: Date,
