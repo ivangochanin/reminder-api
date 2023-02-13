@@ -27,6 +27,11 @@ const ReminderSchema = new mongoose.Schema({
 		type: String,
 		required: [true, 'ERROR: Content is required']
 	},
+	language: {
+		type: String,
+		trim: true,
+		enum: ['html', 'css', 'javascript', 'jsx', 'json', 'graphql'],
+	},
 	createdAt: {
 		type: Date,
 		default: Date.now(),
