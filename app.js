@@ -10,6 +10,7 @@ const remindersRoutesAdmin = require('./routes/admin/remindersRoutesAdmin');
 const categoriesRoutesAdmin = require('./routes/admin/categoriesRoutesAdmin');
 const subCategoriesRoutesAdmin = require('./routes/admin/subCategoriesRoutesAdmin');
 const uploadImageRoutes = require('./routes/uploadImageRoutes');
+const searchRoutes = require('./routes/searchRoutes')
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use('/api/v1/categories', categoriesRoutes);
 app.use('/api/v1/subcategories', subCategoriesRoutes);
 app.use('/api/v1/reminders', remindersRoutes);
 app.use('/api/v1/upload', uploadImageRoutes);
+app.use('/api/v1/search', searchRoutes);
 
 // Admin routes
 app.use('/api/v1/admin/categories', categoriesRoutesAdmin);

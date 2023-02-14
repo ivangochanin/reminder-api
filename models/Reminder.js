@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const atlasPlugin = require('mongoose-atlas-search');
 
 const ReminderSchema = new mongoose.Schema({
 	subcategory: {
@@ -38,4 +39,21 @@ const ReminderSchema = new mongoose.Schema({
 	},
 });
 
-module.exports = mongoose.model('Reminder', ReminderSchema);
+const ReminderModel = mongoose.model('Reminder', ReminderSchema);
+
+atlasPlugin.initialize({
+	model: ReminderModel,
+	overwriteFind: true,
+	searchKey: 'search',
+	searchFunction: query => {
+		return {
+			'wildcard': {
+				'query': `${query}*`,
+				'path': 'content',
+				'allowAnalyzedField': true
+			}
+		}
+	}
+});
+
+module.exports = ReminderModel
