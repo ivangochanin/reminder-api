@@ -40,7 +40,8 @@ const ReminderSchema = new mongoose.Schema({
 });
 
 const ReminderModel = mongoose.model('Reminder', ReminderSchema);
-
+ // Before everything we need to Create an Atlas Search Index:
+ // https://www.mongodb.com/docs/atlas/atlas-search/create-index/
 atlasPlugin.initialize({
 	model: ReminderModel,
 	overwriteFind: true,
