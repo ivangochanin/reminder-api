@@ -1,10 +1,23 @@
 const Reminder = require('../models/Reminder');
+const SubCategory = require('../models/SubCategory');
 
 const searchController = async (req, res) => {
   try {
     const results = await Reminder.find({search: req.query.keyphrase})
 
-    return res.json(results)
+    if (results.length) {
+
+      const reminders = await Promise.all(
+        results.map(async item => {
+          const subcategory = await SubCategory.findById(item.subcategory)
+            .populate('category')
+
+          return {...item, subcategory}
+        })
+      )
+
+      return res.json(reminders)
+    }
   } catch (error) {
     return res.status(500).json({msg: 'Error'})
   }
