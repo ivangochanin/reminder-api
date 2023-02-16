@@ -49,7 +49,7 @@ atlasPlugin.initialize({
 	searchFunction: query => {
 		return {
 			'wildcard': {
-				'query': `${query}*`,
+				'query': `*${query}*`,
 				'path': 'content',
 				'allowAnalyzedField': true
 			}
